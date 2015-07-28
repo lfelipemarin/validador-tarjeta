@@ -28,8 +28,8 @@
     </target>
     <target name="wsimport-client-Tarjeta" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/Tarjeta"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Tarjeta" destdir="${build.generated.dir}/jax-wsCache/Tarjeta" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Tarjeta/wsdl/localhost_33510/TarjetaServer/Tarjeta.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:33510/TarjetaServer/Tarjeta?WSDL" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Tarjeta/wsdl/localhost_33510/TarjetaServer/Tarjeta.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Tarjeta" destdir="${build.generated.dir}/jax-wsCache/Tarjeta" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Tarjeta/wsdl/localhost_8080/TarjetaServer/Tarjeta.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/TarjetaServer/Tarjeta?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Tarjeta/wsdl/localhost_8080/TarjetaServer/Tarjeta.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/Tarjeta"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">

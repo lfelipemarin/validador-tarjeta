@@ -12,6 +12,10 @@
 
 <xs:element name="validarLongitudDigitosResponse" type="tns:validarLongitudDigitosResponse"/>
 
+<xs:element name="validarTarjeta" type="tns:validarTarjeta"/>
+
+<xs:element name="validarTarjetaResponse" type="tns:validarTarjetaResponse"/>
+
 <xs:element name="validarTipoTar" type="tns:validarTipoTar"/>
 
 <xs:element name="validarTipoTarResponse" type="tns:validarTipoTarResponse"/>
@@ -25,7 +29,22 @@
 
 <xs:complexType name="validarCVVResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="validarTarjeta">
+<xs:sequence>
+<xs:element name="tarjeta" type="xs:string" minOccurs="0"/>
+<xs:element name="cvv" type="xs:string" minOccurs="0"/>
+<xs:element name="tipo" type="xs:string" minOccurs="0"/>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="validarTarjetaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

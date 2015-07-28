@@ -5,22 +5,27 @@
  */
 package com.udea.classes;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.faces.bean.ManagedBean;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
  * @author toughbook
  */
 @ManagedBean
-public class Tarjeta {
+public class TarjetaCredito {
 
     private String numeroTarjeta;
     private String cvv;
     private Banco banco;
     private String tipoTarjeta;
     private Date fechaVencimiento;
-    private Usuario tarjetaHabiente;
+    private String tarjetaHabiente;
 
     public String getNumeroTarjeta() {
         return numeroTarjeta;
@@ -58,15 +63,22 @@ public class Tarjeta {
         return fechaVencimiento;
     }
 
+    public XMLGregorianCalendar dateToCalendar(Date date) throws DatatypeConfigurationException {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(date);
+        XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        return date2;
+    }
+
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public Usuario getTarjetaHabiente() {
+    public String getTarjetaHabiente() {
         return tarjetaHabiente;
     }
 
-    public void setTarjetaHabiente(Usuario tarjetaHabiente) {
+    public void setTarjetaHabiente(String tarjetaHabiente) {
         this.tarjetaHabiente = tarjetaHabiente;
     }
 

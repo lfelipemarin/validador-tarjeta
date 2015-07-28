@@ -12,39 +12,47 @@
             <p:panel id="panel" header="Validar Tarjeta de Credito">
 
                 <p:messages id="msgs" />
-
+                <p:growl id="mensajes" showDetail="true" />
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputLabel for="numeroTarjeta" value="Numero de Tarjeta:" />
-                    <p:inputText id="numeroTarjeta" value="#{tarjeta.numeroTarjeta}" required="true" label="NumeroTarjeta">
+                    <p:inputText id="numeroTarjeta" value="#{wsManagedBean.tarjetaClase.numeroTarjeta}" required="true" label="NumeroTarjeta">
                         <f:validateLength minimum="16" maximum="16" />
                         <p:ajax update="msgNumeroTarjeta" event="keyup" />
                     </p:inputText>
                     <p:message for="numeroTarjeta" id="msgNumeroTarjeta" display="icon" />
 
                     <p:outputLabel for="cvv" value="CVV:" />
-                    <p:inputText id="cvv" value="#{tarjeta.cvv}" label="Cvv" required="true">
-                        <f:validateLength minimum="3" />
+                    <p:inputText id="cvv" value="#{wsManagedBean.tarjetaClase.cvv}" label="Cvv" required="true">
+                        <f:validateLength minimum="3" maximum="4"/>
                         <p:ajax update="msgCvv" event="keyup" />
                     </p:inputText>
                     <p:message for="cvv" id="msgCvv" display="icon" />
 
                     <p:outputLabel for="banco" value="Banco: " />
-                    <p:selectOneMenu id="banco" value="#{wsManagedBean.bancos}">
-                        <!--<p:ajax listener="" update="city" />-->
-                        <f:selectItem itemLabel="Seleccione un Banco" itemValue="#{wsManagedBean.banco}" noSelectionOption="true" />
+                    <p:selectOneMenu id="banco" value="#{wsManagedBean.banco}" style="width:250px">
+
+                        <f:selectItem itemLabel="Seleccione un Banco" itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{wsManagedBean.bancos}" />
                     </p:selectOneMenu>
+
                     <br/>
                     <p:outputLabel for="tarjeta" value="Tarjeta:" />
-                    <p:selectOneRadio id="tarjeta" value="#{wsManagedBean.tarjeta}"  layout="grid" columns="3">
+                    <p:selectOneRadio id="tarjeta" value="#{wsManagedBean.tarjetaClase.tipoTarjeta}"  layout="grid" columns="3">
                         <f:selectItems value="#{wsManagedBean.tarjetas}" var="c" itemLabel="#{tarj}" itemValue="#{tarj}"/>
                     </p:selectOneRadio>
-
-
-
+                    <br/>
+                    <p:outputLabel for="fechaexp" value="Fecha de Expiracion:" />
+                    <p:calendar id="fechaexp" value="#{wsManagedBean.tarjetaClase.fechaVencimiento}" showOn="button" />
+                    <br/>
+                    <p:outputLabel for="nombre" value="Nombre Tarjetahabiente:" />
+                    <p:inputText id="nombre" value="#{wsManagedBean.tarjetaClase.tarjetaHabiente}" label="TarjetaHabiente" required="true">
+                        <f:validateLength minimum="3" maximum="4"/>
+                        <p:ajax update="msgNombre" event="keyup" />
+                    </p:inputText>
+                    <p:message for="nombre" id="msgNombre" display="icon" />
                 </h:panelGrid>
 
-                <p:commandButton value="Validar" update="panel" actionListener="#" icon="ui-icon-check" />
+                <p:commandButton value="Validar" update="mensajes" actionListener="#{wsManagedBean.validar()}" icon="ui-icon-check" />
             </p:panel>
         </h:form>
 

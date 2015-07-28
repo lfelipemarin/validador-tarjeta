@@ -4,6 +4,24 @@
 <xsd:import namespace="http://tarjeta.ws/" schemaLocation="http://localhost:8080/TarjetaServer/Tarjeta?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="validarTipoTar">
+<part name="parameters" element="tns:validarTipoTar"/>
+</message>
+<message name="validarTipoTarResponse">
+<part name="parameters" element="tns:validarTipoTarResponse"/>
+</message>
+<message name="validarLongitudDigitos">
+<part name="parameters" element="tns:validarLongitudDigitos"/>
+</message>
+<message name="validarLongitudDigitosResponse">
+<part name="parameters" element="tns:validarLongitudDigitosResponse"/>
+</message>
+<message name="validarTarjeta">
+<part name="parameters" element="tns:validarTarjeta"/>
+</message>
+<message name="validarTarjetaResponse">
+<part name="parameters" element="tns:validarTarjetaResponse"/>
+</message>
 <message name="validarCVV">
 <part name="parameters" element="tns:validarCVV"/>
 </message>
@@ -16,19 +34,19 @@
 <message name="esFechaValidaResponse">
 <part name="parameters" element="tns:esFechaValidaResponse"/>
 </message>
-<message name="validarLongitudDigitos">
-<part name="parameters" element="tns:validarLongitudDigitos"/>
-</message>
-<message name="validarLongitudDigitosResponse">
-<part name="parameters" element="tns:validarLongitudDigitosResponse"/>
-</message>
-<message name="validarTipoTar">
-<part name="parameters" element="tns:validarTipoTar"/>
-</message>
-<message name="validarTipoTarResponse">
-<part name="parameters" element="tns:validarTipoTarResponse"/>
-</message>
 <portType name="TarjetaWS">
+<operation name="validarTipoTar">
+<input wsam:Action="http://tarjeta.ws/TarjetaWS/validarTipoTarRequest" message="tns:validarTipoTar"/>
+<output wsam:Action="http://tarjeta.ws/TarjetaWS/validarTipoTarResponse" message="tns:validarTipoTarResponse"/>
+</operation>
+<operation name="validarLongitudDigitos">
+<input wsam:Action="http://tarjeta.ws/TarjetaWS/validarLongitudDigitosRequest" message="tns:validarLongitudDigitos"/>
+<output wsam:Action="http://tarjeta.ws/TarjetaWS/validarLongitudDigitosResponse" message="tns:validarLongitudDigitosResponse"/>
+</operation>
+<operation name="validarTarjeta">
+<input wsam:Action="http://tarjeta.ws/TarjetaWS/validarTarjetaRequest" message="tns:validarTarjeta"/>
+<output wsam:Action="http://tarjeta.ws/TarjetaWS/validarTarjetaResponse" message="tns:validarTarjetaResponse"/>
+</operation>
 <operation name="validarCVV">
 <input wsam:Action="http://tarjeta.ws/TarjetaWS/validarCVVRequest" message="tns:validarCVV"/>
 <output wsam:Action="http://tarjeta.ws/TarjetaWS/validarCVVResponse" message="tns:validarCVVResponse"/>
@@ -37,17 +55,36 @@
 <input wsam:Action="http://tarjeta.ws/TarjetaWS/esFechaValidaRequest" message="tns:esFechaValida"/>
 <output wsam:Action="http://tarjeta.ws/TarjetaWS/esFechaValidaResponse" message="tns:esFechaValidaResponse"/>
 </operation>
-<operation name="validarLongitudDigitos">
-<input wsam:Action="http://tarjeta.ws/TarjetaWS/validarLongitudDigitosRequest" message="tns:validarLongitudDigitos"/>
-<output wsam:Action="http://tarjeta.ws/TarjetaWS/validarLongitudDigitosResponse" message="tns:validarLongitudDigitosResponse"/>
-</operation>
-<operation name="validarTipoTar">
-<input wsam:Action="http://tarjeta.ws/TarjetaWS/validarTipoTarRequest" message="tns:validarTipoTar"/>
-<output wsam:Action="http://tarjeta.ws/TarjetaWS/validarTipoTarResponse" message="tns:validarTipoTarResponse"/>
-</operation>
 </portType>
 <binding name="TarjetaWSPortBinding" type="tns:TarjetaWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="validarTipoTar">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="validarLongitudDigitos">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="validarTarjeta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="validarCVV">
 <soap:operation soapAction=""/>
 <input>
@@ -58,24 +95,6 @@
 </output>
 </operation>
 <operation name="esFechaValida">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="validarLongitudDigitos">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="validarTipoTar">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

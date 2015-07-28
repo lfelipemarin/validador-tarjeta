@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/TarjetaServer/Tarjeta?WSDL" uri="src/conf/xml-resources/web-service-references/Tarjeta/wsdl/localhost_8080/TarjetaServer/Tarjeta.wsdl"/>
-    <system systemId="http://localhost:8080/TarjetaServer/Tarjeta?xsd=1" uri="src/conf/xml-resources/web-service-references/Tarjeta/wsdl/localhost_8080/TarjetaServer/Tarjeta.xsd_1.xsd"/>
     <system systemId="http://localhost:33510/TarjetaServer/Tarjeta?WSDL" uri="src/conf/xml-resources/web-service-references/Tarjeta/wsdl/localhost_33510/TarjetaServer/Tarjeta.wsdl"/>
     <system systemId="http://localhost:33510/TarjetaServer/Tarjeta?xsd=1" uri="src/conf/xml-resources/web-service-references/Tarjeta/wsdl/localhost_33510/TarjetaServer/Tarjeta.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TarjetaServer/Tarjeta?WSDL" uri="src/conf/xml-resources/web-service-references/Tarjeta/wsdl/localhost_8080/TarjetaServer/Tarjeta.wsdl"/>
+    <system systemId="http://localhost:8080/TarjetaServer/Tarjeta?xsd=1" uri="src/conf/xml-resources/web-service-references/Tarjeta/wsdl/localhost_8080/TarjetaServer/Tarjeta.xsd_1.xsd"/>
 </catalog>
