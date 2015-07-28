@@ -34,7 +34,7 @@ public class wsManagedBean {
         return port.esFechaValida(fechaExp);
     }
 
-    private String validarCVV(java.lang.String cvv, java.lang.String tipoTarjeta) {
+    private Boolean validarCVV(java.lang.String cvv, java.lang.String tipoTarjeta) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.tarjeta.TarjetaWS port = service.getTarjetaWSPort();
@@ -46,6 +46,13 @@ public class wsManagedBean {
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.tarjeta.TarjetaWS port = service.getTarjetaWSPort();
         return port.validarLongitudDigitos(digitos);
+    }
+
+    private Boolean validarTarjeta(java.lang.String tarjeta, java.lang.String cvv, java.lang.String tipo, javax.xml.datatype.XMLGregorianCalendar fecha) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.tarjeta.TarjetaWS port = service.getTarjetaWSPort();
+        return port.validarTarjeta(tarjeta, cvv, tipo, fecha);
     }
 
     private String validarTipoTar(java.lang.Integer digitos) {

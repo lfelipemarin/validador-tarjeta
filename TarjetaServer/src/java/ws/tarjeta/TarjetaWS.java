@@ -5,10 +5,16 @@
  */
 package ws.tarjeta;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -32,6 +38,22 @@ public class TarjetaWS {
         }
     }
 
+    @WebMethod(operationName = "validarTarjeta")
+    public Boolean validarTarjeta(@WebParam(name = "tarjeta") String tarjeta, @WebParam(name = "cvv") String cvv, @WebParam(name = "tipo") String tipo, @WebParam(name = "fecha") Calendar fecha) {
+        if (validarLongitudDigitos(tarjeta)) {
+            String ffd = "";
+            for (int i = 0; i < 4; i++) {
+                ffd += tarjeta.charAt(i);
+            }
+            if (tipo.equals(validarTipoTar(Integer.parseInt(ffd)))) {
+                if (validarCVV(cvv, tipo)) {
+                    return esFechaValida(fecha);
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Web service operation
      *
@@ -40,17 +62,15 @@ public class TarjetaWS {
      * @return
      */
     @WebMethod(operationName = "validarCVV")
-    public String validarCVV(@WebParam(name = "cvv") String cvv, @WebParam(name = "tipoTarjeta") String tipoTarjeta) {
+    public Boolean validarCVV(@WebParam(name = "cvv") String cvv, @WebParam(name = "tipoTarjeta") String tipoTarjeta) {
         if (cvv.length() == 3 && tipoTarjeta.equals("MasterCard")) {
-            return "MasterCard";
+            return true;
         } else if (cvv.length() == 3 && tipoTarjeta.equals("Visa")) {
-            return "Visa";
+            return true;
         } else if (cvv.length() == 4 && tipoTarjeta.equals("American Express")) {
-            return "American Express";
-        } else if (cvv.length() == 4 && tipoTarjeta.equals("Dinners")) {
-            return "Dinners";
+            return true;
         } else {
-            return "Revise los digitos o tipo de tarjeta";
+            return cvv.length() == 4 && tipoTarjeta.equals("Dinners");
         }
     }
 
@@ -61,17 +81,28 @@ public class TarjetaWS {
      * @return
      */
     @WebMethod(operationName = "esFechaValida")
-    public Boolean esFechaValida(@WebParam(name = "fechaExp") Calendar fechaExp) {
-        return fechaExp.get(Calendar.DAY_OF_MONTH) > Calendar.DAY_OF_MONTH;
+    public Boolean esFechaValida(@WebParam(name = "fechaExp") Calendar fechaExp
+    ) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = dateFormat.format(fechaExp);
+        XMLGregorianCalendar hoy = new XMLGregorianCalendarImpl();
+        try {
+            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(strDate);
+            return true;
+        } catch (DatatypeConfigurationException e) {
+            return false;
+        }
     }
 
     /**
      * Web service operation
+     *
      * @param primeros4Digitos
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "validarTipoTar")
-    public String validarTipoTar(@WebParam(name = "digitos") Integer primeros4Digitos) {
+    public String validarTipoTar(@WebParam(name = "digitos") Integer primeros4Digitos
+    ) {
         if (primeros4Digitos <= 2999) {
             return "MasterCard";
         } else if (primeros4Digitos > 2999 && primeros4Digitos <= 5999) {
@@ -81,7 +112,7 @@ public class TarjetaWS {
         } else if (primeros4Digitos > 8999 && primeros4Digitos <= 9999) {
             return "Visa";
         } else {
-            return "Algo malo paso";
+            return null;
         }
     }
 
