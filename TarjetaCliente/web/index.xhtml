@@ -29,19 +29,22 @@
                     <p:message for="cvv" id="msgCvv" display="icon" />
 
                     <p:outputLabel for="banco" value="Banco: " />
-                    <p:selectOneMenu id="banco" value="">
+                    <p:selectOneMenu id="banco" value="#{wsManagedBean.bancos}">
                         <!--<p:ajax listener="" update="city" />-->
-                        <f:selectItem itemLabel="Seleccione un Banco" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="" />
+                        <f:selectItem itemLabel="Seleccione un Banco" itemValue="#{wsManagedBean.banco}" noSelectionOption="true" />
+                        <f:selectItems value="#{wsManagedBean.bancos}" />
                     </p:selectOneMenu>
-
-                    <p:outputLabel for="city" value="City:" />
-                    <p:selectOneRadio id="city" value="#{radioView.city}"  layout="grid" columns="3">
-                        <f:selectItems value="#{radioView.cities}" var="c" itemLabel="#{city}" itemValue="#{city}"/>
+                    <br/>
+                    <p:outputLabel for="tarjeta" value="Tarjeta:" />
+                    <p:selectOneRadio id="tarjeta" value="#{wsManagedBean.tarjeta}"  layout="grid" columns="3">
+                        <f:selectItems value="#{wsManagedBean.tarjetas}" var="c" itemLabel="#{tarj}" itemValue="#{tarj}"/>
                     </p:selectOneRadio>
+
+
+
                 </h:panelGrid>
 
-                <p:commandButton value="Save" update="panel" actionListener="#" icon="ui-icon-check" />
+                <p:commandButton value="Validar" update="panel" actionListener="#" icon="ui-icon-check" />
             </p:panel>
         </h:form>
 

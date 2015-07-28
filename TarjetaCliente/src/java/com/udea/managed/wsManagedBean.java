@@ -5,6 +5,9 @@
  */
 package com.udea.managed;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.ws.WebServiceRef;
@@ -20,11 +23,67 @@ public class wsManagedBean {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/TarjetaServer/Tarjeta.wsdl")
     private Tarjeta service;
+    
+    private List<String> tarjetas;
+    private String banco;
+    private String tarjeta;
+    private List<String> bancos;
+
+    @PostConstruct
+    public void init() {
+        bancos = new ArrayList<>();
+        tarjetas = new ArrayList<>();
+
+        tarjetas.add("MasterCard");
+        tarjetas.add("Visa");
+        tarjetas.add("American Express");
+        tarjetas.add("Dinners");
+        bancos.add("Bancolombia");
+        bancos.add("Citybank");
+        bancos.add("Davivienda");
+        bancos.add("Banco de Bogota");
+        bancos.add("Bancolchon");
+        bancos.add("BBVA");
+        bancos.add("Banco Santander");
+
+    }
 
     /**
      * Creates a new instance of wsManagedBean
      */
     public wsManagedBean() {
+    }
+
+    public List<String> getTarjetas() {
+        return tarjetas;
+    }
+
+    public void setTarjetas(List<String> tarjetas) {
+        this.tarjetas = tarjetas;
+    }
+
+    public String getBanco() {
+        return banco;
+    }
+
+    public void setBanco(String banco) {
+        this.banco = banco;
+    }
+
+    public String getTarjeta() {
+        return tarjeta;
+    }
+
+    public void setTarjeta(String tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public List<String> getBancos() {
+        return bancos;
+    }
+
+    public void setBancos(List<String> bancos) {
+        this.bancos = bancos;
     }
 
     private Boolean esFechaValida(javax.xml.datatype.XMLGregorianCalendar fechaExp) {
