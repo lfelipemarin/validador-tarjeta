@@ -121,7 +121,7 @@ public class wsManagedBean implements Serializable {
                 tarjetaClase.dateToCalendar(tarjetaClase.getFechaVencimiento()))) {
             FacesMessage msg;
 
-            msg = new FacesMessage("Numero de tarjeta " + tarjetaClase.getNumeroTarjeta() + ", tipo de tarjeta "
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Valid","Numero de tarjeta " + tarjetaClase.getNumeroTarjeta() + ", tipo de tarjeta "
                     + tarjetaClase.getTipoTarjeta() + " con fecha de vencimiento " + tarjetaClase.getFechaVencimiento()
                     + " es valida para el banco " + banco);
 
@@ -131,7 +131,7 @@ public class wsManagedBean implements Serializable {
             FacesMessage msg;
 
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "Tarjeta no valida, por favor verifique"
-                    + "los datos");
+                    + " los datos");
 
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return false;
