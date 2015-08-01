@@ -5,16 +5,10 @@
  */
 package ws.tarjeta;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -39,7 +33,7 @@ public class TarjetaWS {
     }
 
     @WebMethod(operationName = "validarTarjeta")
-    public Boolean validarTarjeta(@WebParam(name = "tarjeta") String tarjeta, @WebParam(name = "cvv") String cvv, @WebParam(name = "tipo") String tipo, @WebParam(name = "fecha") Calendar fecha) {
+    public Boolean validarTarjeta(@WebParam(name = "tarjeta") String tarjeta, @WebParam(name = "cvv") String cvv, @WebParam(name = "tipo") String tipo, @WebParam(name = "fecha") Date fecha) {
         if (validarLongitudDigitos(tarjeta)) {
             String ffd = "";
             for (int i = 0; i < 4; i++) {
@@ -47,6 +41,7 @@ public class TarjetaWS {
             }
             if (tipo.equals(validarTipoTar(Integer.parseInt(ffd)))) {
                 if (validarCVV(cvv, tipo)) {
+                    System.out.println("Todo OK!");
                     return esFechaValida(fecha);
                 }
             }
@@ -81,15 +76,10 @@ public class TarjetaWS {
      * @return
      */
     @WebMethod(operationName = "esFechaValida")
-    public Boolean esFechaValida(@WebParam(name = "fechaExp") Calendar fechaExp
-    ) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = dateFormat.format(fechaExp);
-        XMLGregorianCalendar hoy = new XMLGregorianCalendarImpl();
-        try {
-            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(strDate);
+    public Boolean esFechaValida(@WebParam(name = "fechaExp") Date fechaExp) {
+        if (fechaExp.after(new Date())) {
             return true;
-        } catch (DatatypeConfigurationException e) {
+        } else {
             return false;
         }
     }
